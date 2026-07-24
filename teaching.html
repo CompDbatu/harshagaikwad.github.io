@@ -1,75 +1,342 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Teaching </title>
-<link rel="stylesheet" href="style.css">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F1ECDC;
+    --paper-card: #FBF8EE;
+    --ink: #202B22;
+    --ink-soft: #55625A;
+    --rule: #CDBFA0;
+    --pine: #2E6B4C;
+    --pine-deep: #1E4A34;
+    --brick: #A23B2C;
+    --gold: #A9791F;
+  }
 
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Navbar ---------- */
+  .navbar {
+    background: var(--ink);
+    display: flex;
+    gap: 4px;
+    padding: 0 24px;
+    border-bottom: 3px solid var(--brick);
+  }
+
+  .navbar a {
+    color: #E9E3D2;
+    text-decoration: none;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 16px 14px;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+
+  .navbar a:hover,
+  .navbar a:focus-visible {
+    color: #ffffff;
+  }
+
+  .navbar a.active {
+    color: #ffffff;
+  }
+
+  .navbar a.active::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 0;
+    height: 3px;
+    background: var(--brick);
+  }
+
+  .navbar a:focus-visible {
+    outline: 2px solid #E9E3D2;
+    outline-offset: -2px;
+  }
+
+  /* ---------- Ruled-paper container ---------- */
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 37px,
+      var(--rule) 37px,
+      var(--rule) 38px
+    );
+    background-position: 0 118px;
+  }
+
+  /* ---------- Hero ---------- */
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pine-deep);
+    margin: 0 0 6px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 52px;
+    line-height: 1.05;
+    margin: 0 0 28px;
+    color: var(--ink);
+  }
+
+  /* ---------- Objective block with stamp ---------- */
+  .objective-block {
+    position: relative;
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--pine);
+    padding: 24px 28px;
+    margin: 0 0 52px;
+  }
+
+  .objective-block h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pine-deep);
+    margin: 0 0 10px;
+  }
+
+  .objective-block p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  .stamp {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    width: 92px;
+    height: 92px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    transform: rotate(-9deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.85;
+  }
+
+  .stamp::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+  }
+
+  .stamp span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 640px) {
+    .stamp { display: none; }
+  }
+
+  /* ---------- Course registers ---------- */
+  .section-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pine-deep);
+    margin: 0 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .registers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  @media (max-width: 700px) {
+    .registers { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .register-group {
+    margin-bottom: 36px;
+  }
+
+  .course-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 11px 6px;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s ease, padding-left 0.15s ease;
+  }
+
+  .course-row:hover {
+    background: var(--paper-card);
+    padding-left: 12px;
+  }
+
+  .course-row:last-child {
+    border-bottom: none;
+  }
+
+  .code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .course-title {
+    font-size: 15.5px;
+    color: var(--ink);
+    flex: 1;
+    position: relative;
+  }
+
+  .course-title.new {
+    color: var(--brick);
+    font-weight: 600;
+  }
+
+  .tag-new {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--brick);
+    border: 1px solid var(--brick);
+    border-radius: 3px;
+    padding: 1px 6px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  h1, .objective-block, .registers { position: relative; z-index: 1; }
+</style>
+</head>
 <body>
 
 <div class="navbar">
-<a href="index.html">Home</a>
-<a href="research.html">Research</a>
-<a href="publications.html">Publications</a>
-<a href="teaching.html">Teaching</a>
-<a href="Activities.html">Activities</a>
+  <a href="index.html">Home</a>
+  <a href="research.html">Research</a>
+  <a href="publications.html">Publications</a>
+  <a href="teaching.html" class="active">Teaching</a>
+  <a href="Activities.html">Activities</a>
 </div>
 
 <div class="container">
 
-<h1>Teaching</h1>
+  <p class="eyebrow">Faculty record</p>
+  <h1>Teaching</h1>
 
-<h2>Teaching Objective</h2>
-<p>
-To develop students’ knowledge, critical thinking, and problem-solving abilities 
-aligned with real-world and professional goals.
-</p>
+  <div class="objective-block">
+    <h2>Teaching objective</h2>
+    <p>
+      To develop students' knowledge, critical thinking, and problem-solving abilities
+      aligned with real-world and professional goals.
+    </p>
+    <div class="stamp"><span>Curriculum<br>on record</span></div>
+  </div>
 
-<h2>Courses Taught</h2>
+  <p class="section-label">Courses taught</p>
 
-<table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; text-align: center; width: 60%;">
-  <tr style="background-color: #f2f2f2;">
-    <th>Sr. No.</th>
-    <th>Undergraduate</th>
-    <th>Postgraduate</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Numerical Methods</td>
-    <td>Natural Language Processing</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Probability and Statistics</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>C Programming</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Machine Learning</td>
-    <td>Advanced Machine Learning</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>Big Data Analytics</td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>Database Management Systems</td>
-    <td>Research Methodology</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>Constitution of India</td>
-    <td>-</td>
-  </tr>
-</table>
- 
+  <div class="registers">
+    <div class="register-group">
+      <p class="section-label" style="font-size:13px; border-bottom:none; margin-bottom:12px;">Undergraduate</p>
+
+      <div class="course-row">
+        <span class="code">UG&middot;01</span>
+        <span class="course-title">Numerical Methods</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;02</span>
+        <span class="course-title">Probability and Statistics</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;03</span>
+        <span class="course-title">C Programming</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;04</span>
+        <span class="course-title">Machine Learning</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;05</span>
+        <span class="course-title">Big Data Analytics</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;06</span>
+        <span class="course-title">Database Management Systems</span>
+      </div>
+      <div class="course-row">
+        <span class="code">UG&middot;07</span>
+        <span class="course-title">Constitution of India</span>
+      </div>
+    </div>
+
+    <div class="register-group">
+      <p class="section-label" style="font-size:13px; border-bottom:none; margin-bottom:12px;">Postgraduate</p>
+
+      <div class="course-row">
+        <span class="code">PG&middot;01</span>
+        <span class="course-title">Natural Language Processing</span>
+      </div>
+      <div class="course-row">
+        <span class="code">PG&middot;02</span>
+        <span class="course-title">Advanced Machine Learning</span>
+      </div>
+      <div class="course-row">
+        <span class="code">PG&middot;03</span>
+        <span class="course-title">Research Methodology</span>
+      </div>
+      <div class="course-row">
+        <span class="code">PG&middot;04</span>
+        <span class="course-title new">Prompt Engineering<span class="tag-new">New</span></span>
+      </div>
+    </div>
+  </div>
 
 </div>
 
